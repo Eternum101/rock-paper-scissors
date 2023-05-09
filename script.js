@@ -1,5 +1,5 @@
-const playerScore = document.getElementById("player-score");
-const computerScore = document.querySelector("#computer-score");
+const playerScoreSpan = document.getElementById("player-score");
+const computerScoreSpan = document.querySelector("#computer-score");
 const resultOutcome = document.querySelector("#result-outcome");
 const playerSelection = document.querySelectorAll(".buttons");
 const resultPlayer = document.querySelector(".result-selection-player");
@@ -52,20 +52,24 @@ function checkWinner() {
 }
 
 function hasPlayerWon(hasWon) {
-    hasWon ? playerScore.innerHTML = parseInt(playerScore.innerHTML) + 1 : 
-             computerScore.innerHTML = parseInt(computerScore.innerHTML) + 1; 
+    hasWon ? playerScoreSpan.innerHTML = parseInt(playerScoreSpan.innerHTML) + 1 : 
+             computerScoreSpan.innerHTML = parseInt(computerScoreSpan.innerHTML) + 1; 
 }
 
 function selectEvent(button) {
-    if(roundCount < 5) {
-        playerChoice = button.textContent;
-        getComputerChoice();
-        resultPlayer.textContent = `${playerChoice}`;
-        resultComputer.textContent = `${computerChoice}`;
-        resultOutcome.textContent = checkWinner();
-        incrementRound();
-    } else {
-        alert("Game Over Nerd"); 
+    let maxScore = 5;
+
+    playerChoice = button.textContent;
+    getComputerChoice();
+    resultPlayer.textContent = `${playerChoice}`;
+    resultComputer.textContent = `${computerChoice}`;
+    resultOutcome.textContent = checkWinner();
+    incrementRound(); 
+    
+    let playerScore = parseInt(playerScoreSpan.innerHTML);
+    let computerScore = parseInt(computerScoreSpan.innerHTML);
+    if (playerScore === maxScore || computerScore === maxScore) {
+        console.log("End Game");
     }
 }
 
@@ -78,7 +82,7 @@ playerSelection.forEach(button => button.addEventListener("click", () => {
     selectEvent(button);
 }));
 
-// If playerscore > computer score {
+// If playerScoreSpan > computer score {
     "You won! Congragulations!" 
 //} else {
     "You lost! :("
