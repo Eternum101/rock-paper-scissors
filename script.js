@@ -69,15 +69,18 @@ function selectEvent(button) {
     
     let playerScore = parseInt(playerScoreSpan.innerHTML);
     let computerScore = parseInt(computerScoreSpan.innerHTML);
-    const gameEndText = document.querySelector('.game-end-text'); 
+    const gameEndText = document.querySelector('.game-end-text');
+    const modal = document.querySelector('.modal');
     if(playerScore === maxScore) {
-        gameEndText.textContent = 'You won!';
+        modal.style.visibility = 'visible';
+        gameEndText.textContent = 'You Won!';
+        buttonPlayAgain.style.visibility = 'visible';
     } else if (computerScore === maxScore) {
-        gameEndText.textContent = 'You lost!';
+        modal.style.visibility = 'visible';
+        gameEndText.textContent = 'You Lost!';
+        buttonPlayAgain.style.visibility = 'visible';
     }
-    //if (playerScore === maxScore || computerScore === maxScore) {       
-    //    console.log("End Game");
-    //}
+    resetGame();
 }
 
 function resetGame() {

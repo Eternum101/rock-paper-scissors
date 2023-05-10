@@ -9,14 +9,15 @@
 </head>
 <body>
     <div class="title">ROCK PAPER SCISSOR</div>
+    <div class="content">
+    <div class="result-header" id="result-outcome">First to Score 5 Points Wins the Game</div>
     <div class="container-buttons" id="player-selection">
         <button class="buttons">🪨</button>
         <button class="buttons">📰</button>
         <button class="buttons">✂️</button>
     </div>
 
-    <div class="result-header" id="result-outcome">Results:</div>
-    <div>Round: 
+    <div class="round-count">Round: 
         <span id="round-count">1</span>
     </div>
     <div class="container-results">
@@ -33,10 +34,11 @@
     </div>
     <div class="modal">
         <div class="modal-content">
-            <p class="end-game-text"></p>
+            <p class="game-end-text"></p>
             <button class="play-again">Play Again!</button>
         </div>
     </div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>
