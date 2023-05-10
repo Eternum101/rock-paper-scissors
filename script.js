@@ -4,7 +4,8 @@ const resultOutcome = document.querySelector("#result-outcome");
 const playerSelection = document.querySelectorAll(".buttons");
 const resultPlayer = document.querySelector(".result-selection-player");
 const resultComputer = document.querySelector(".result-selection-computer");
-const roundCountSpan = document.getElementById("round-count"); 
+const roundCountSpan = document.getElementById("round-count");
+const buttonPlayAgain = document.querySelector('.play-again');
 
 let playerChoice;
 let computerChoice;
@@ -68,9 +69,21 @@ function selectEvent(button) {
     
     let playerScore = parseInt(playerScoreSpan.innerHTML);
     let computerScore = parseInt(computerScoreSpan.innerHTML);
-    if (playerScore === maxScore || computerScore === maxScore) {
-        console.log("End Game");
+    const gameEndText = document.querySelector('.game-end-text'); 
+    if(playerScore === maxScore) {
+        gameEndText.textContent = 'You won!';
+    } else if (computerScore === maxScore) {
+        gameEndText.textContent = 'You lost!';
     }
+    //if (playerScore === maxScore || computerScore === maxScore) {       
+    //    console.log("End Game");
+    //}
+}
+
+function resetGame() {
+    buttonPlayAgain.addEventListener('click', () => {
+        window.location.reload();
+    });
 }
 
 function incrementRound() {
