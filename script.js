@@ -57,9 +57,8 @@ function hasPlayerWon(hasWon) {
              computerScoreSpan.innerHTML = parseInt(computerScoreSpan.innerHTML) + 1; 
 }
 
-function selectEvent(button) {
+function playGame(button) {
     let maxScore = 5;
-
     playerChoice = button.textContent;
     getComputerChoice();
     resultPlayer.textContent = `${playerChoice}`;
@@ -95,7 +94,7 @@ function incrementRound() {
 }
 
 playerSelection.forEach(button => button.addEventListener("click", () => {
-    selectEvent(button);
+    playGame(button);
 }));
 
 // If playerScoreSpan > computer score {
