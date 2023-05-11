@@ -87,14 +87,12 @@ body {
     margin-bottom: 40px;
 }
 
-.result-selection-player {
-    font-size: 40px;
-    margin-top: 30px;
-}
-
-.result-selection-computer {
-    font-size: 40px;
-    margin-top: 30px;
+.icon-group {
+    display: flex;
+    flex-flow: column;
+    margin-top: 15px;
+    font-size: 35px;
+    gap: 15px;
 }
 
 .modal {

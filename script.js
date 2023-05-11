@@ -8,8 +8,8 @@ const roundCountSpan = document.getElementById("round-count");
 const buttonPlayAgain = document.querySelector('.play-again');
 const gameEndText = document.querySelector('.game-end-text');
 const modal = document.querySelector('.modal');
-const playerContainer = document.querySelector(".player-container");
-const computerContainer = document.querySelector(".computer-container");
+const playerHistory = document.getElementById("player-history");
+const computerHistory = document.getElementById("computer-history");
 
 let playerChoice;
 let computerChoice;
@@ -75,15 +75,15 @@ function checkGameState() {
 }
 
 function appendToRoundHistory(playerDescision, computerDescision) {
-    createScoreElement(playerContainer, playerDescision);
-    createScoreElement(computerContainer, computerDescision);  
+    createScoreElement(playerHistory, playerDescision);
+    createScoreElement(computerHistory, computerDescision);  
 }
 
 function createScoreElement(parentElement, result) {
     let playerResult = document.createElement("span");
     playerResult.textContent = result;
     playerResult.classList.add("result-selection-player");
-    parentElement.appendChild(playerResult);
+    parentElement.prepend(playerResult);
 }
 
 function endGame() {
