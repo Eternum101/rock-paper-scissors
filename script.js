@@ -8,6 +8,8 @@ const roundCountSpan = document.getElementById("round-count");
 const buttonPlayAgain = document.querySelector('.play-again');
 const gameEndText = document.querySelector('.game-end-text');
 const modal = document.querySelector('.modal');
+const playerContainer = document.querySelector(".player-container");
+const computerContainer = document.querySelector(".computer-container");
 
 let playerChoice;
 let computerChoice;
@@ -21,14 +23,11 @@ function getComputerChoice() {
     
     switch (randomChoice) {
         case 1: 
-            computerChoice = "🪨";
-            break;
+            return "🪨";
         case 2: 
-            computerChoice = "📰";
-            break;
+            return "📰";
         case 3: 
-            computerChoice = "✂️";
-            break;
+            return "✂️";
     }
 }
 
@@ -75,6 +74,18 @@ function checkGameState() {
     }
 }
 
+function appendToRoundHistory(playerDescision, computerDescision) {
+    createScoreElement(playerContainer, playerDescision);
+    createScoreElement(computerContainer, computerDescision);  
+}
+
+function createScoreElement(parentElement, result) {
+    let playerResult = document.createElement("span");
+    playerResult.textContent = result;
+    playerResult.classList.add("result-selection-player");
+    parentElement.appendChild(playerResult);
+}
+
 function endGame() {
     let result = playerScore > computerScore ? "You Won!" : "You Lost!";
     modal.style.visibility = 'visible';
@@ -82,11 +93,10 @@ function endGame() {
     buttonPlayAgain.style.visibility = 'visible';
 }
 
-function playGame(button) {
+function playRound(button) {
     playerChoice = button.textContent;
-    getComputerChoice();
-    resultPlayer.textContent = `${playerChoice}`;
-    resultComputer.textContent = `${computerChoice}`;
+    computerChoice = getComputerChoice();
+    appendToRoundHistory(playerChoice, computerChoice);
     resultOutcome.textContent = checkWinner();
     incrementRound(); 
     checkGameState();
@@ -94,7 +104,7 @@ function playGame(button) {
 }
 
 playerSelection.forEach(button => button.addEventListener("click", () => {
-    playGame(button);
+    playRound(button);
 }));
 
 function resetGame() {
