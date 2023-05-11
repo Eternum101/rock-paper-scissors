@@ -6,11 +6,15 @@ const resultPlayer = document.querySelector(".result-selection-player");
 const resultComputer = document.querySelector(".result-selection-computer");
 const roundCountSpan = document.getElementById("round-count");
 const buttonPlayAgain = document.querySelector('.play-again');
+const gameEndText = document.querySelector('.game-end-text');
+const modal = document.querySelector('.modal');
 
 let playerChoice;
 let computerChoice;
 let result;
 let roundCount = 1;
+let playerScore;
+let computerScore; 
 
 function getComputerChoice() {
     const randomChoice = Math.floor(Math.random() * 3) + 1;
@@ -26,6 +30,11 @@ function getComputerChoice() {
             computerChoice = "✂️";
             break;
     }
+}
+
+function hasPlayerWon(hasWon) {
+    hasWon ? playerScoreSpan.innerHTML = parseInt(playerScoreSpan.innerHTML) + 1 : 
+             computerScoreSpan.innerHTML = parseInt(computerScoreSpan.innerHTML) + 1; 
 }
 
 function checkWinner() {
@@ -52,50 +61,47 @@ function checkWinner() {
     }
 }
 
-function hasPlayerWon(hasWon) {
-    hasWon ? playerScoreSpan.innerHTML = parseInt(playerScoreSpan.innerHTML) + 1 : 
-             computerScoreSpan.innerHTML = parseInt(computerScoreSpan.innerHTML) + 1; 
+function incrementRound() {
+    roundCount++
+    roundCountSpan.innerHTML = roundCount;
+}
+
+function checkGameState() {
+    let maxScore = 5;
+    playerScore = parseInt(playerScoreSpan.innerHTML);
+    computerScore = parseInt(computerScoreSpan.innerHTML);
+    if(playerScore === maxScore || computerScore === maxScore) {
+        endGame();
+    }
+}
+
+function endGame() {
+    let result = playerScore > computerScore ? "You Won!" : "You Lost!";
+    modal.style.visibility = 'visible';
+    gameEndText.textContent = result;
+    buttonPlayAgain.style.visibility = 'visible';
 }
 
 function playGame(button) {
-    let maxScore = 5;
     playerChoice = button.textContent;
     getComputerChoice();
     resultPlayer.textContent = `${playerChoice}`;
     resultComputer.textContent = `${computerChoice}`;
     resultOutcome.textContent = checkWinner();
     incrementRound(); 
-    
-    let playerScore = parseInt(playerScoreSpan.innerHTML);
-    let computerScore = parseInt(computerScoreSpan.innerHTML);
-    const gameEndText = document.querySelector('.game-end-text');
-    const modal = document.querySelector('.modal');
-    if(playerScore === maxScore) {
-        modal.style.visibility = 'visible';
-        gameEndText.textContent = 'You Won!';
-        buttonPlayAgain.style.visibility = 'visible';
-    } else if (computerScore === maxScore) {
-        modal.style.visibility = 'visible';
-        gameEndText.textContent = 'You Lost!';
-        buttonPlayAgain.style.visibility = 'visible';
-    }
+    checkGameState();
     resetGame();
 }
+
+playerSelection.forEach(button => button.addEventListener("click", () => {
+    playGame(button);
+}));
 
 function resetGame() {
     buttonPlayAgain.addEventListener('click', () => {
         window.location.reload();
     });
 }
-
-function incrementRound() {
-    roundCount++
-    roundCountSpan.innerHTML = roundCount;
-}
-
-playerSelection.forEach(button => button.addEventListener("click", () => {
-    playGame(button);
-}));
 
 // If playerScoreSpan > computer score {
     "You won! Congragulations!" 
