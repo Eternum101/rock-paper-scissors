@@ -105,6 +105,11 @@ body {
 .result-selection-player {
     padding: 5px;
     font-size: 40px;
+    opacity: .5;
+}
+
+.result-selection-player.winner {
+    opacity: 1;
 }
 
 .modal {

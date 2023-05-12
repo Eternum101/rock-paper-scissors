@@ -1,5 +1,5 @@
 const playerScoreSpan = document.getElementById("player-score");
-const computerScoreSpan = document.querySelector("#computer-score");
+const computerScoreSpan = document.getElementById("computer-score");
 const resultOutcome = document.querySelector("#result-outcome");
 const playerSelection = document.querySelectorAll(".buttons");
 const resultPlayer = document.querySelector(".result-selection-player");
@@ -16,7 +16,7 @@ let computerChoice;
 let result;
 let roundCount = 1;
 let playerScore;
-let computerScore; 
+let computerScore;
 
 function getComputerChoice() {
     const randomChoice = Math.floor(Math.random() * 3) + 1;
@@ -31,33 +31,39 @@ function getComputerChoice() {
     }
 }
 
-function hasPlayerWon(hasWon) {
+function setRoundScore(hasWon) {
     hasWon ? playerScoreSpan.innerHTML = parseInt(playerScoreSpan.innerHTML) + 1 : 
-             computerScoreSpan.innerHTML = parseInt(computerScoreSpan.innerHTML) + 1; 
+             computerScoreSpan.innerHTML = parseInt(computerScoreSpan.innerHTML) + 1;
 }
 
-function checkWinner() {
+function setRoundText() {
        if (playerChoice === "🪨" && computerChoice === "📰") {
-        hasPlayerWon(false);
-        return "You lose! Paper beats Rock!"; 
+        setRoundScore(false);
+        return "You lose! Paper beats Rock!";
     } else if (playerChoice === "📰" && computerChoice === "🪨") {
-        hasPlayerWon(true);
+        setRoundScore(true);
         return "You win! Paper beats Rock!";
     } else if (playerChoice === "✂️" && computerChoice === "🪨") {
-        hasPlayerWon(false);
+        setRoundScore(false);
         return "You lose! Rock beats Scissors!"; 
     } else if (playerChoice === "🪨" && computerChoice === "✂️") {
-        hasPlayerWon(true);
+        setRoundScore(true);
         return "You win! Rock beats Scissors!";
     } else if (playerChoice === "📰" && computerChoice === "✂️") {
-        hasPlayerWon(false);
+        setRoundScore(false);
         return "You lose! Scissors beats Paper!";
     } else if (playerChoice === "✂️" && computerChoice === "📰") {
-        hasPlayerWon(true);
+        setRoundScore(true);
         return "You win! Scissors beats Paper!";
     } else if (playerChoice === computerChoice) {
         return "Draw!"; 
     }
+}
+
+function hasPlayerWon() {
+    return (playerChoice === "📰" && computerChoice === "🪨" || 
+        playerChoice === "🪨" && computerChoice === "✂️" ||
+        playerChoice === "✂️" && computerChoice === "📰");
 }
 
 function incrementRound() {
@@ -75,14 +81,20 @@ function checkGameState() {
 }
 
 function appendToRoundHistory(playerDescision, computerDescision) {
-    createScoreElement(playerHistory, playerDescision);
-    createScoreElement(computerHistory, computerDescision);  
+    let isDraw = playerChoice === computerChoice;
+    createScoreElement(playerHistory, playerDescision, hasPlayerWon() && !isDraw, isDraw);
+    createScoreElement(computerHistory, computerDescision, !hasPlayerWon() && !isDraw, isDraw); 
 }
 
-function createScoreElement(parentElement, result) {
+function createScoreElement(parentElement, result, isWinner, isDraw) {
     let playerResult = document.createElement("span");
     playerResult.textContent = result;
     playerResult.classList.add("result-selection-player");
+    if (isWinner) {
+        playerResult.classList.add("winner");
+    } else if (isDraw) {
+        playerResult.style.opacity = 0.5;
+    }
     parentElement.prepend(playerResult);
 }
 
@@ -97,7 +109,7 @@ function playRound(button) {
     playerChoice = button.textContent;
     computerChoice = getComputerChoice();
     appendToRoundHistory(playerChoice, computerChoice);
-    resultOutcome.textContent = checkWinner();
+    resultOutcome.textContent = setRoundText();
     incrementRound(); 
     checkGameState();
     resetGame();
