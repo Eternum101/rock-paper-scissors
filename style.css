@@ -10,6 +10,9 @@ body {
     background: #DBDBDB;
     text-align: center;
     font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
@@ -54,9 +57,10 @@ body {
 .container-results {
     display: flex;
     justify-content: center;
-    background-color: #EDC500;
+    background-color: #DBDBDB;
     gap: 1rem; 
     height: auto;
+    padding-bottom: 45px;
 }
 
 .player-container, .computer-container {
@@ -90,9 +94,17 @@ body {
 .icon-group {
     display: flex;
     flex-flow: column;
-    margin-top: 15px;
+    margin-top: 30px;
     font-size: 35px;
     gap: 15px;
+    background-color: #EDC500;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.result-selection-player {
+    padding: 5px;
+    font-size: 40px;
 }
 
 .modal {
@@ -147,3 +159,24 @@ body {
     font-size: 50px;
 }
 
+footer {
+    display: flex;
+    margin-top: auto;
+    height: 100px;
+    background-color: #6D6D6D;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+}
+
+.fa-github {
+    color: white;
+    font-size: 25px;
+    padding-left: 10px;
+    transition: transform 250ms;
+}
+
+.fa-github:hover {
+    transform: translateY(-10px);
+}
