@@ -12,8 +12,18 @@ View Demo
 A implementation of the famous game "rock paper scissors".
 
 ## Screenshots
-![](screenshots/landing-page-1.png)
-![](screenshots/landing-page-2.png)
+
+### Starting Screen
+![](screenshots/starting-screen-rps.png)
+
+### Playing Screen
+![](screenshots/playing-screen-rps.png)
+
+### Winning Screen
+![](screenshots/winning-screen-rps.png)
+
+### Losing Screen
+![](screenshots/losing-screen-rps.png)
 
 [Back to Top](#landing-page)
 
