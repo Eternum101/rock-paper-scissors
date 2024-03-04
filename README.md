@@ -1,6 +1,6 @@
 # Rock Paper Scissors
 
-View Demo
+[View Demo](https://eternum101.github.io/rock-paper-scissors/)
 
 ## Table of Contents
 - [About The Project](#about-the-project)
