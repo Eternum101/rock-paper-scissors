@@ -25,7 +25,7 @@ function getComputerChoice() {
     
     switch (randomChoice) {
         case 1: 
-            return "🪨";
+            return "🏔️";
         case 2: 
             return "📰";
         case 3: 
@@ -43,16 +43,16 @@ function setRoundScore(hasWon) {
 // Determines the outcome of a game round, updates the scores and returns a string 
 // indicating the outcome
 function setRoundText() {
-       if (playerChoice === "🪨" && computerChoice === "📰") {
+       if (playerChoice === "🏔️" && computerChoice === "📰") {
         setRoundScore(false);
         return "You Lose! Paper beats Rock!";
-    } else if (playerChoice === "📰" && computerChoice === "🪨") {
+    } else if (playerChoice === "📰" && computerChoice === "🏔️") {
         setRoundScore(true);
         return "You Win! Paper beats Rock!";
-    } else if (playerChoice === "✂️" && computerChoice === "🪨") {
+    } else if (playerChoice === "✂️" && computerChoice === "🏔️") {
         setRoundScore(false);
         return "You Lose! Rock beats Scissors!"; 
-    } else if (playerChoice === "🪨" && computerChoice === "✂️") {
+    } else if (playerChoice === "🏔️" && computerChoice === "✂️") {
         setRoundScore(true);
         return "You Win! Rock beats Scissors!";
     } else if (playerChoice === "📰" && computerChoice === "✂️") {
@@ -68,8 +68,8 @@ function setRoundText() {
 
 // Determines whether the player has won a game round
 function hasPlayerWon() {
-    return (playerChoice === "📰" && computerChoice === "🪨" || 
-        playerChoice === "🪨" && computerChoice === "✂️" ||
+    return (playerChoice === "📰" && computerChoice === "🏔️" || 
+        playerChoice === "🏔️" && computerChoice === "✂️" ||
         playerChoice === "✂️" && computerChoice === "📰");
 }
 
